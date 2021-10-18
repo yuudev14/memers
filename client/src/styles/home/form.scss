@@ -1,0 +1,9 @@
+@mixin addForm {
+    .addForm {
+        position: fixed;
+        background-color: #ff0000;
+        width: 324px;
+        display: flex;
+        flex-direction: column;
+    }
+}

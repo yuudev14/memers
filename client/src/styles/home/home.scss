@@ -1,0 +1,41 @@
+@import "./form.scss";
+@import "./userProfile.scss";
+.home {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    margin-top: 70px;
+    .memeFeed {
+        width: 100%;
+        background-color: aqua;
+    }
+    .profileAndAddMeme {
+        width: 30%;
+        display: none;
+        width: 324px;
+        .profileAndAddMeme2 {
+            .profileAndAddMemeContainer {
+                position: fixed;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 756px) {
+    .home {
+        .memeFeed {
+            width: 756px;
+        }
+    }
+}
+
+@media only screen and (min-width: 1080px) {
+    .home {
+        .profileAndAddMeme {
+            display: block;
+            @include addForm;
+            @include userProfile;
+        }
+    }
+}

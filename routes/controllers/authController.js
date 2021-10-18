@@ -22,7 +22,7 @@ const signUp = async(req, res) => {
 
 const signIn = async(req, res) => {
     try {
-        const { usernameOrEmail, email, password } = req.body;
+        const { usernameOrEmail, password } = req.body;
         const user = await db("users")
             .where({ username: usernameOrEmail })
             .orWhere({ email: usernameOrEmail })
