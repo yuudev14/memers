@@ -6,8 +6,15 @@ const app = express();
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, 'client/build')));
 }
-app.get('/meme', (req, res) => {
-    res.send('gig');
+app.get('/meme', async(req, res) => {
+    try {
+        const x = await db.select().table("x");
+        res.send(x);
+
+    } catch (error) {
+
+    }
+
 })
 const port = process.env.PORT || 4000;
 
