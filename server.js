@@ -12,6 +12,7 @@ app.get('/meme', async(req, res) => {
         res.send(x);
 
     } catch (error) {
+        res.sendStatus(404);
 
     }
 
