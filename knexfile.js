@@ -26,8 +26,5 @@ module.exports = {
         migrations: {
             directory: `${__dirname}/db/migrations`,
         },
-        ssl: process.env.NODE_ENV === "production" ? {
-            rejectUnauthorized: false,
-        } : '',
     },
 };
