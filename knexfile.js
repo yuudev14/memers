@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const { CLIENT, DATABASE, DB_USER, DB_PASSWORD, HOST, PG_PORT } = process.env;
 
-const options = {
+module.exports = {
     development: {
         client: CLIENT,
         connection: {
@@ -13,7 +13,7 @@ const options = {
             port: PG_PORT,
         },
         migrations: {
-            directory: `${__dirname}/migrations`,
+            directory: `${__dirname}/db/migrations`,
         },
     },
 
@@ -29,7 +29,7 @@ const options = {
             max: 10,
         },
         migrations: {
-            directory: `${__dirname}/migrations`,
+            directory: `${__dirname}/db/migrations`,
         },
     },
 
@@ -41,11 +41,7 @@ const options = {
             max: 10,
         },
         migrations: {
-            tableName: "knex_migrations",
+            directory: `${__dirname}/db/migrations`,
         },
     },
 };
-
-var environment = process.env.NODE_ENV || "development";
-var config = options[environment];
-module.exports = config;
