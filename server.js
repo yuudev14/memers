@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require("path");
+const db = require("./db/knex");
 
 const app = express();
 if (process.env.NODE_ENV === "production") {
@@ -10,6 +11,8 @@ app.get('/meme', (req, res) => {
 })
 const port = process.env.PORT || 4000;
 
+
+
 app.listen(port, () => {
-    console.log(`listening to port ${port}`);
+    console.log(`App listening on port ${port}!`);
 });
