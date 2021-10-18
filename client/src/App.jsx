@@ -1,17 +1,20 @@
 import './App.css';
-import { useEffect } from 'react';
-import axios from 'axios';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import Home from './pages/home';
+import SignUp from './pages/signup';
+import SignIn from './pages/signin';
 
 function App() {
-  useEffect(() => {
-    (async() => {
-      const x = await axios.get('/meme');
-      console.log(x);
-    })()
-  })
   return (
     <div className="App">
-      <p>Meme</p>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/sign-up" component={SignUp} />
+          <Route exact path="/sign-in" component={SignIn} />
+        </Switch>
+      </Router>
+      
     </div>
   );
 }
