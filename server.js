@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, 'client/build')));
 }
 app.get('/meme', (req, res) => {
-    res.send('gi');
+    res.send('gig');
 })
 const port = process.env.PORT || 4000;
 
