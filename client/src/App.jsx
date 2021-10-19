@@ -7,6 +7,7 @@ import Authenticated from './components/authenticated';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { verifyAuth } from './slice/actions/authAction';
+import SingleMeme from './pages/authenticatedPage/singleMeme';
 
 const App = () =>{
   const dispatch = useDispatch();
@@ -21,6 +22,11 @@ const App = () =>{
             <Route exact path="/">
               <Authenticated>
                 <Home />
+              </Authenticated>
+            </Route>
+            <Route path="/:id">
+              <Authenticated>
+                <SingleMeme />
               </Authenticated>
             </Route>
             <Route path="/sign-up" component={SignUp} />

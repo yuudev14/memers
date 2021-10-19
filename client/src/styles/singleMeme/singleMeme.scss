@@ -1,0 +1,11 @@
+@import "../home/meme.scss";
+@import "../variables.scss";
+.oneMeme {
+    @include meme;
+    position: fixed;
+    width: 100%;
+    max-width: 653px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -45%);
+}

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addMemeAction, laughAction, viewAllMemeAction } from "./actions/memeAction";
+import { addMemeAction, laughAction, viewAllMemeAction, viewSingleMemeAction } from "./actions/memeAction";
 
 const initialState = {
     memes: [],
@@ -9,7 +9,11 @@ const initialState = {
 const memeSlice = createSlice({
     name: "memes",
     initialState,
-    reducers: {},
+    reducers: {
+        resetMemeAction: (state) => {
+            state.meme = [];
+        }
+    },
     extraReducers: {
         [addMemeAction.pending]: (state) => {
             state.pending = true
@@ -22,6 +26,13 @@ const memeSlice = createSlice({
             state.pending = true
         },
         [viewAllMemeAction.fulfilled]: (state, action) => {
+            state.memes = action.payload;
+            state.pending = false;
+        },
+        [viewSingleMemeAction.pending]: (state) => {
+            state.pending = true
+        },
+        [viewSingleMemeAction.fulfilled]: (state, action) => {
             state.memes = action.payload;
             state.pending = false;
         },
@@ -46,5 +57,5 @@ const memeSlice = createSlice({
 });
 
 const memeReducer = memeSlice.reducer;
-// export {  }
+export const { resetMemeAction } = memeSlice.actions
 export default memeReducer;

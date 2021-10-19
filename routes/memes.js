@@ -6,6 +6,7 @@ const route = express.Router();
 
 route.use(verifyToken);
 route.get('/', memes.allMemes);
+route.get('/:id', memes.singleMemes);
 route.post('/', memes.addMeme);
 route.post('/laugh/:id', memes.laughAtMeme);
 route.delete('/:id', memes.deleteMeme);

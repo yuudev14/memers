@@ -29,7 +29,6 @@ const addMeme = async(req, res) => {
             .leftJoin('users', 'users.id', 'memes.user_id')
             .whereRaw("memes.id = ?", [createMeme[0]])
             .orderBy("date", "desc");
-        console.log(memes);
         res.send(memes);
     } catch (error) {
         console.log(error);
@@ -123,6 +122,30 @@ const allMemes = async(req, res) => {
     }
 }
 
+const singleMemes = async(req, res) => {
+    try {
+        const { user: user_id } = res.locals;
+        const { id: meme_id } = req.params;
+        const counts = db("laughs")
+            .count("meme_id")
+            .whereRaw("memes.id = laughs.meme_id")
+            .as("laugh");
+        const isUser = db("laughs")
+            .count("user_id")
+            .where({ user_id })
+            .andWhereRaw("memes.id = laughs.meme_id")
+            .as("isUser");
+        const meme = await db
+            .select("memes.*", counts, isUser, "users.username")
+            .from("memes")
+            .leftJoin('users', 'users.id', 'memes.user_id')
+            .whereRaw("memes.id = ?", meme_id)
+        res.send(meme);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 
 module.exports = {
     addMeme,
@@ -130,4 +153,5 @@ module.exports = {
     deleteMeme,
     updateMeme,
     laughAtMeme,
+    singleMemes,
 }

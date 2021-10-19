@@ -21,6 +21,16 @@ export const viewAllMemeAction = createAsyncThunk("memes/viewAllMemeAction", asy
     }
 });
 
+export const viewSingleMemeAction = createAsyncThunk("memes/viewSingleMemeAction", async(id) => {
+    try {
+        const memes = await axios.get(`/memes/${id}`, { headers: JSON.parse(localStorage.getItem("memers")) });
+        return memes.data;
+    } catch (error) {
+        console.log(error);
+        return []
+    }
+});
+
 export const laughAction = createAsyncThunk("memes/laughAction", async(id) => {
     try {
         const meme = await axios.post(`/memes/laugh/${id}`, {}, { headers: JSON.parse(localStorage.getItem("memers")) });
