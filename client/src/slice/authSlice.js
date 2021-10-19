@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { signupAction, verifyAuth } from "./actions/authAction";
+import { loginAction, signupAction, verifyAuth } from "./actions/authAction";
 
 
 
@@ -20,6 +20,10 @@ const authSlice = createSlice({
         },
         resetAuthErrors: (state, action) => {
             state.errors = []
+        },
+        logoutAuth: () => {
+            localStorage.removeItem("memers");
+            return initialState;
         }
 
     },
@@ -32,7 +36,18 @@ const authSlice = createSlice({
         },
         [signupAction.fulfilled]: (state, action) => {
             if ("error" in action.payload) {
-                console.log(action.payload);
+                state.errors.push(action.payload.error);
+            } else {
+                state.auth = true;
+                state.token = action.payload.token;
+            }
+            state.pending = false
+        },
+        [loginAction.pending]: (state) => {
+            state.pending = true
+        },
+        [loginAction.fulfilled]: (state, action) => {
+            if ("error" in action.payload) {
                 state.errors.push(action.payload.error);
             } else {
                 state.auth = true;
@@ -45,5 +60,5 @@ const authSlice = createSlice({
 })
 
 const authReducer = authSlice.reducer
-export const { addAuthErrors, resetAuthErrors } = authSlice.actions;
+export const { addAuthErrors, resetAuthErrors, logoutAuth } = authSlice.actions;
 export default authReducer;

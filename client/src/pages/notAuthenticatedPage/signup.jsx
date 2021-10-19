@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { addAuthErrors, resetAuthErrors } from '../../slice/authSlice';
@@ -15,6 +15,12 @@ const Signup = () => {
   const errors = useSelector(state => state.auth.errors);
   const dispatch = useDispatch();
   const history = useHistory();
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetAuthErrors());
+    }
+  }, [])
 
   const signup = async(e) => {
     e.preventDefault();
@@ -41,10 +47,6 @@ const Signup = () => {
         history.push("/");
       }
     }
-
-
-
-    console.log(signupForm)
   }
 
   const updateSignupForm = (e) => {
