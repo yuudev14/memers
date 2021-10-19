@@ -1,0 +1,22 @@
+.signup,
+.signin {
+    form {
+        position: fixed;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+    }
+}
+
+@media only screen and (min-width: 400px) {
+    .signup,
+    .signin {
+        form {
+            width: 400px;
+        }
+    }
+}

@@ -16,6 +16,12 @@ const signUp = async(req, res) => {
         const token = generateToken(user[0]);
         res.send({ token });
     } catch (error) {
+        if (error.constraint === "users_username_unique") {
+            return res.status(403).send("username already exist")
+        }
+        if (error.constraint === "users_email_unique") {
+            return res.status(403).send("email already exist")
+        }
         console.log(error);
     }
 }
@@ -42,7 +48,16 @@ const signIn = async(req, res) => {
     }
 }
 
+const isVerify = (req, res) => {
+    try {
+        res.send(res.locals.user && true);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports = {
     signUp,
     signIn,
+    isVerify,
 }

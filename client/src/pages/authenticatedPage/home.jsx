@@ -1,7 +1,6 @@
 import React from 'react'
-import AddMeme from '../components/home/addMeme';
-import UserProfile from '../components/home/userProfile';
-import "../styles/home/home.scss";
+import AddMeme from "../../components/home/addMeme";
+import "../../styles/home/home.scss";
 
 const Home = () => {
   return (
@@ -13,7 +12,6 @@ const Home = () => {
       <section className="profileAndAddMeme">
         <div className="profileAndAddMeme2">
           <div className="profileAndAddMemeContainer">
-            <UserProfile />
             <AddMeme />
           </div>
         </div>
