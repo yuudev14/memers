@@ -36,13 +36,24 @@ const updateMeme = async(req, res) => {
 const laughAtMeme = async(req, res) => {
     try {
         const { user: user_id } = res.locals;
-        const { id } = req.params;
+        const { id: meme_id } = req.params;
         const ifExist = await db
             .select("")
             .from("laughs")
-            .where({ meme_id: id })
+            .where({ meme_id })
             .andWhere({ user_id });
-        console.log(ifExist);
+        if (!ifExist.length) {
+            await db("laughs")
+                .insert({ meme_id, user_id });
+            res.send(true);
+        } else {
+            await db
+                .delete()
+                .from("laughs")
+                .where({ meme_id })
+                .andWhere({ user_id });
+            res.send(false);
+        }
 
     } catch (error) {
         console.log(error);
