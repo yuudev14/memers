@@ -71,6 +71,43 @@ const updateMeme = async(req, res) => {
     }
 }
 
+const addComment = async(req, res) => {
+    try {
+        const { user: user_id } = res.locals;
+        const { id: meme_id } = req.params;
+        const { comment } = req.body;
+        const commentId = await db
+            .insert({ meme_id, user_id, comment })
+            .returning("id")
+            .from("comments");
+
+
+        const commentData = await db("comments")
+            .select(["comments.*", "users.username"])
+            .leftJoin("users", "users.id", "comments.user_id")
+            .whereRaw("comments.id = ?", [commentId[0]])
+        res.send(commentData[0]);
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const viewComment = async(req, res) => {
+    try {
+        const { id: meme_id } = req.params;
+
+        const commentData = await db("comments")
+            .select(["comments.*", "users.username"])
+            .leftJoin("users", "users.id", "comments.user_id")
+            .whereRaw("comments.meme_id = ?", [meme_id])
+        res.send(commentData);
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const laughAtMeme = async(req, res) => {
     try {
         const { user: user_id } = res.locals;
@@ -154,4 +191,6 @@ module.exports = {
     updateMeme,
     laughAtMeme,
     singleMemes,
+    addComment,
+    viewComment,
 }
