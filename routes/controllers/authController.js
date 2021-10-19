@@ -11,10 +11,11 @@ const signUp = async(req, res) => {
         const hash = await bcrypt.hash(password, salt);
         const user = await db
             .insert({ username, email, password: hash })
-            .returning("id")
+            .returning(["id", "username", "date", "email"])
             .into("users")
-        const token = generateToken(user[0]);
-        res.send({ token });
+        const token = generateToken(user[0].id);
+        delete user[0].id
+        return res.send({ token, userInfo: user[0] })
     } catch (error) {
         if (error.constraint === "users_username_unique") {
             return res.status(403).send("username already exist")
@@ -32,13 +33,17 @@ const signIn = async(req, res) => {
         const user = await db("users")
             .where({ username: usernameOrEmail })
             .orWhere({ email: usernameOrEmail })
-            .select(["id", "password"]);
+            .select("*");
         if (user) {
             const userPassword = user[0].password;
             const userId = user[0].id;
             const result = await bcrypt.compare(password, userPassword);
             const token = generateToken(userId);
-            if (result) return res.send({ token })
+
+            const userToBeSend = user[0];
+            delete userToBeSend.id;
+            delete userToBeSend.password
+            if (result) return res.send({ token, userInfo: userToBeSend })
             return res.status(403).send("wrong password");
         } else {
             return res.status(403).send("can't find user")
@@ -48,9 +53,12 @@ const signIn = async(req, res) => {
     }
 }
 
-const isVerify = (req, res) => {
+const isVerify = async(req, res) => {
     try {
-        res.send(res.locals.user && true);
+        const user = await db("users")
+            .where({ id: res.locals.user })
+            .select(["username", "email", "date"]);
+        res.send(user);
     } catch (error) {
         console.log(error);
     }

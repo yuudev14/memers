@@ -17,6 +17,7 @@ export const viewAllMemeAction = createAsyncThunk("memes/viewAllMemeAction", asy
         return memes.data;
     } catch (error) {
         console.log(error);
+        return []
     }
 });
 

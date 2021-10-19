@@ -42,7 +42,7 @@ const AddMeme = () => {
           <label htmlFor="memeFile" >
             <i className="fa fa-image"></i>
           </label>
-          <input type="submit" />
+          <input type="submit" disabled={preview ? false : true} />
         </div>
         { preview && <img src={preview} alt="preview meme"/> }
       </form> 

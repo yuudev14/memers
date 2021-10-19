@@ -6,8 +6,8 @@ const Authenticated = ({ children }) => {
     const { auth} = useSelector(state => state.auth);
     return ( 
         <Fragment >
-            { auth === false && <Redirect to="/sign-in" /> }
-            { children }
+            { auth === false ? <Redirect to="/sign-in" /> : children}
+            
         </Fragment>
     )
 }

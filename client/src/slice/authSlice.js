@@ -29,7 +29,16 @@ const authSlice = createSlice({
     },
     extraReducers: {
         [verifyAuth.fulfilled]: (state, action) => {
-            state.auth = action.payload;
+            console.log(action.payload);
+            if (action.payload) {
+                return {
+                    ...state,
+                    auth: true,
+                    ...JSON.parse(localStorage.getItem("memers")),
+                    userInfo: action.payload[0],
+                }
+            }
+            state.auth = false;
         },
         [signupAction.pending]: (state) => {
             state.pending = true
@@ -40,6 +49,7 @@ const authSlice = createSlice({
             } else {
                 state.auth = true;
                 state.token = action.payload.token;
+                state.userInfo = action.payload.userInfo;
             }
             state.pending = false
         },
@@ -52,6 +62,7 @@ const authSlice = createSlice({
             } else {
                 state.auth = true;
                 state.token = action.payload.token;
+                state.userInfo = action.payload.userInfo;
             }
             state.pending = false
         }

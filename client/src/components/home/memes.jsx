@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from "react-redux";
 import { laughAction } from '../../slice/actions/memeAction';
+import moment from "moment";
 
 const Memes = (props) => {
   const {
@@ -22,7 +23,7 @@ const Memes = (props) => {
         <i className="fa fa-user"></i>
         <div className="memeInfo">
           <h5>{meme.username}</h5>
-          <p>{meme.date}</p>
+          <p>{moment(meme.date).fromNow()}</p>
         </div>
       </div>
       <div className="meme">
