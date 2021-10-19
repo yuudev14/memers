@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addMemeAction } from "./actions/memeAction";
+import { addMemeAction, viewAllMemeAction } from "./actions/memeAction";
 
 const initialState = {
     memes: [],
@@ -16,6 +16,13 @@ const memeSlice = createSlice({
         },
         [addMemeAction.fulfilled]: (state, action) => {
             state.memes.unshift(action.payload);
+            state.pending = false;
+        },
+        [viewAllMemeAction.pending]: (state) => {
+            state.pending = true
+        },
+        [viewAllMemeAction.fulfilled]: (state, action) => {
+            state.memes = action.payload;
             state.pending = false;
         },
     }

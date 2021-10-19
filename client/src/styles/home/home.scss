@@ -1,19 +1,22 @@
 @import "./form.scss";
 @import "./userProfile.scss";
+@import "./meme.scss";
 .home {
     display: flex;
     height: 100%;
     width: 100%;
     justify-content: center;
-    margin-top: 70px;
+    margin-top: 100px;
     .memeFeed {
         width: 100%;
-        background-color: aqua;
+        padding: 20px;
+        padding-top: 0;
+        padding-bottom: 100px;
+        @include meme;
     }
     .profileAndAddMeme {
-        width: 30%;
         display: none;
-        width: 324px;
+        width: 452px;
         .profileAndAddMeme2 {
             .profileAndAddMemeContainer {
                 position: fixed;
@@ -22,10 +25,10 @@
     }
 }
 
-@media only screen and (min-width: 756px) {
+@media only screen and (min-width: 648px) {
     .home {
         .memeFeed {
-            width: 756px;
+            width: 628px
         }
     }
 }

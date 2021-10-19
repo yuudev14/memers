@@ -14,8 +14,7 @@ export const addMemeAction = createAsyncThunk("memes/addMemeAction", async(memes
 export const viewAllMemeAction = createAsyncThunk("memes/viewAllMemeAction", async(memes) => {
     try {
         const memes = await axios.get("/memes", { headers: JSON.parse(localStorage.getItem("memers")) });
-        console.log(memes);
-        // return add.data;
+        return memes.data;
     } catch (error) {
         console.log(error);
     }

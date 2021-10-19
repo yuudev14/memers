@@ -95,8 +95,9 @@ const allMemes = async(req, res) => {
             .andWhereRaw("memes.id = laughs.meme_id")
             .as("isUser");
         const memes = await db
-            .select("*", counts, isUser)
-            .from("memes");
+            .select("memes.*", counts, isUser, "users.username")
+            .from("memes")
+            .leftJoin('users', 'users.id', 'memes.user_id')
         res.send(memes);
     } catch (error) {
         console.log(error);

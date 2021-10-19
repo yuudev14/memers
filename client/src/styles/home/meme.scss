@@ -1,0 +1,42 @@
+@import "../variables.scss";
+@mixin meme {
+    .memes {
+        width: 100%;
+        background-color: $secondaryColor;
+        margin-bottom: 20px;
+        .meme_header,
+        .icons {
+            padding: 10px 20px;
+        }
+        p {
+            margin: 10px 20px;
+        }
+        img.meme_media {
+            width: 100%;
+        }
+        .laugh {
+            font-size: 1em;
+            height: 50px;
+            span {
+                font-size: 2em;
+                cursor: pointer;
+                &:hover {
+                    font-size: 2.1em;
+                }
+            }
+        }
+        .meme_header {
+            display: flex;
+            .fa-user {
+                font-size: 2rem;
+                color: $violet;
+            }
+            .memeInfo {
+                padding: 0 20px;
+                p {
+                    margin: 0;
+                }
+            }
+        }
+    }
+}

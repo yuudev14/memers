@@ -1,9 +1,51 @@
+@import "../variables.scss";
 @mixin addForm {
     .addForm {
         position: fixed;
-        background-color: #ff0000;
-        width: 324px;
+        background-color: $secondaryColor;
+        width: 452px;
         display: flex;
         flex-direction: column;
+        padding: 10px;
+        border-radius: 12px;
+        max-height: 500px;
+        overflow-y: auto;
+        textarea {
+            background-color: transparent;
+            width: 100%;
+            border: none;
+            outline: none;
+            resize: none;
+            color: $fontColor;
+            font-size: 1rem;
+        }
+        .addMemeBtns {
+            display: flex;
+            label {
+                width: 30%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                display: flex;
+                cursor: pointer;
+                i {
+                    font-size: 2rem;
+                }
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
+            input[type=submit] {
+                padding: 10px;
+                width: 70%;
+                outline: none;
+            }
+        }
+        img {
+            width: 100%;
+        }
+        input[type=file] {
+            display: none;
+        }
     }
 }

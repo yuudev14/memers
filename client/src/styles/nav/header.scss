@@ -4,6 +4,7 @@ header {
     top: 0;
     left: 0;
     width: 100%;
+    background-color: $secondaryColor;
     nav {
         display: flex;
         justify-content: space-between;
@@ -11,6 +12,7 @@ header {
         margin: auto;
         width: 100%;
         align-items: center;
+        padding: 20px;
     }
     .authButtons {
         display: flex;

@@ -36,12 +36,14 @@ const AddMeme = () => {
   return (
     <section className="addForm">
       <form onSubmit={postMeme}>
-        <textarea onChange={auto_grow}></textarea>
-        <input type="file" id="memeFile" onChange={handleFileInputChange}/>
-        <label htmlFor="memeFile">
-          <img alt="add a meme"/>
-        </label>
-        <input type="submit" />
+        <textarea onChange={auto_grow} placeholder="What's your meme"></textarea>
+        <div className='addMemeBtns'>
+          <input type="file" id="memeFile" onChange={handleFileInputChange}/>
+          <label htmlFor="memeFile" >
+            <i className="fa fa-image"></i>
+          </label>
+          <input type="submit" />
+        </div>
         { preview && <img src={preview} alt="preview meme"/> }
       </form> 
     </section>
