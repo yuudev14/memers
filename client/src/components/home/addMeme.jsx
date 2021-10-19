@@ -10,11 +10,13 @@ const AddMeme = () => {
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      setPreview(reader.result);
-    };
+    if(file){
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        setPreview(reader.result);
+      };
+    }
   }
   const auto_grow = (e) => {
     setStatus(e.target.value);
@@ -38,6 +40,7 @@ const AddMeme = () => {
     <section className="addForm">
       <form onSubmit={postMeme}>
         <textarea onChange={auto_grow} placeholder="What's your meme"></textarea>
+        <input type="text" placeholder="img/gif link" onChange={(e) => setPreview(e.target.value)}/>
         <div className='addMemeBtns'>
           <input type="file" id="memeFile" onChange={handleFileInputChange}/>
           <label htmlFor="memeFile" >
@@ -45,7 +48,6 @@ const AddMeme = () => {
           </label>
           <input type="submit" disabled={(preview ? false : true) || pending} />
         </div>
-        <input type="text" onChange={(e) => setPreview(e.target.value)}/>
         { preview && <img src={preview} alt="preview meme"/> }
       </form> 
     </section>

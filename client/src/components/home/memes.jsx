@@ -70,8 +70,8 @@ const Memes = (props) => {
         <>
           <div className="options" ref={optionsRef}>
             <div className="optionBtns">
-              <button onClick={deleteMeme}>Delete</button>
-              <button onClick={() => editFieldsRef.current.classList.toggle("showEditFields")}>Edit</button>
+              <button className="delete" onClick={deleteMeme}>Delete</button>
+              <button className="edit" onClick={() => editFieldsRef.current.classList.toggle("showEditFields")}>Edit</button>
             </div>
             <div className="editFields" ref={ editFieldsRef }>
               <form onSubmit={editMeme}>

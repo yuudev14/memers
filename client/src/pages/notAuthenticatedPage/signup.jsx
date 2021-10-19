@@ -66,10 +66,11 @@ const Signup = () => {
             <li key={li}>{li}</li>
           ))}
         </ul>
-        <input type="email" name="email" onChange={updateSignupForm}/>
-        <input type="text" name="username" onChange={updateSignupForm}/>
-        <input type="password" name="password" onChange={updateSignupForm}/>
-        <input type="password" name="retryPassword" onChange={updateSignupForm}/>
+        <h1>Sign up</h1>
+        <input type="email" name="email" onChange={updateSignupForm} required/>
+        <input type="text" name="username" onChange={updateSignupForm} required/>
+        <input type="password" name="password" onChange={updateSignupForm} required/>
+        <input type="password" name="retryPassword" onChange={updateSignupForm} required/>
         <input type="submit"/>
         <p>Already have an account? <Link to="/sign-in">Sign-in</Link></p>
       </form>

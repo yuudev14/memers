@@ -55,6 +55,16 @@
                 justify-content: space-between;
                 button {
                     width: 40%;
+                    border: none;
+                    box-shadow: none;
+                    color: white;
+                }
+                .edit {
+                    background-color: $green;
+                    color: black;
+                }
+                .delete {
+                    background-color: $violet;
                 }
             }
             .editFields {
@@ -88,6 +98,7 @@
             right: 20px;
             font-size: 2em;
             cursor: pointer;
+            color: $green;
         }
     }
 }

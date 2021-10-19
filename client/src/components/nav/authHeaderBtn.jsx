@@ -13,14 +13,9 @@ const AuthHeaderBtn = () => {
   }
   return (
     <div className="authButtons">
-      { auth ? (
-        <>
+      { auth && (
           <button onClick={logout}>log-out</button>
-          <Link><button>profile</button></Link>
-        </>
-      ) : (
-        <>
-        </>
+
       )}
     </div>
   )
