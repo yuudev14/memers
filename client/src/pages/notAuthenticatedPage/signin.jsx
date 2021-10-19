@@ -44,8 +44,8 @@ const Signin = () => {
           ))}
         </ul>
         <h1>Sign in</h1>
-        <input type="text" name="usernameOrEmail" onChange={updateLoginForm} required/>
-        <input type="password" name="password"  onChange={updateLoginForm} required/>
+        <input type="text" name="usernameOrEmail" onChange={updateLoginForm} required placeholder="username or email"/>
+        <input type="password" name="password"  onChange={updateLoginForm} required placeholder="password"/>
         <input type="submit"/>
         <p>Don't have an account yet? <Link to="/sign-up">Sign-up</Link></p>
       </form>

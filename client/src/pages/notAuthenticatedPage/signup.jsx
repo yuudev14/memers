@@ -67,10 +67,10 @@ const Signup = () => {
           ))}
         </ul>
         <h1>Sign up</h1>
-        <input type="email" name="email" onChange={updateSignupForm} required/>
-        <input type="text" name="username" onChange={updateSignupForm} required/>
-        <input type="password" name="password" onChange={updateSignupForm} required/>
-        <input type="password" name="retryPassword" onChange={updateSignupForm} required/>
+        <input type="email" name="email" onChange={updateSignupForm} required placeholder="email"/>
+        <input type="text" name="username" onChange={updateSignupForm} required placeholder="username"/>
+        <input type="password" name="password" onChange={updateSignupForm} required placeholder="password"/>
+        <input type="password" name="retryPassword" onChange={updateSignupForm} required placeholder="retry password"/>
         <input type="submit"/>
         <p>Already have an account? <Link to="/sign-in">Sign-in</Link></p>
       </form>

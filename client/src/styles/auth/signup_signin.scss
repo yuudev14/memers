@@ -3,13 +3,39 @@
 .signin {
     form {
         position: fixed;
-        width: 100%;
+        width: 95%;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         display: flex;
         flex-direction: column;
         padding: 10px;
+        background-color: $secondaryColor;
+        padding: 20px;
+        border-radius: 12px;
+        min-height: 300px;
+        box-shadow: 1px 1px 5px rgb(15, 15, 15);
+        ul {
+            list-style-type: none;
+            color: $violet;
+        }
+        input {
+            background-color: $primaryColor;
+            border: none;
+            padding: 10px;
+            border-radius: 12px;
+            border-bottom: 1px solid rgb(82, 82, 82);
+            margin-bottom: 10px;
+            outline: none;
+            color: $fontColor;
+        }
+        input[type=submit] {
+            background-color: $violet;
+            color: $primaryColor;
+        }
+        a {
+            color: $green;
+        }
     }
 }
 
@@ -17,36 +43,8 @@
     .signup,
     .signin {
         form {
-            display: flex;
-            flex-direction: column;
             justify-content: center;
             width: 400px;
-            background-color: $secondaryColor;
-            padding: 20px;
-            border-radius: 12px;
-            min-height: 300px;
-            box-shadow: 1px 1px 5px rgb(15, 15, 15);
-            ul {
-                list-style-type: none;
-                color: $violet;
-            }
-            input {
-                background-color: $primaryColor;
-                border: none;
-                padding: 10px;
-                border-radius: 12px;
-                border-bottom: 1px solid rgb(82, 82, 82);
-                margin-bottom: 10px;
-                outline: none;
-                color: $fontColor;
-            }
-            input[type=submit] {
-                background-color: $violet;
-                color: $primaryColor;
-            }
-            a {
-                color: $green;
-            }
         }
     }
 }
