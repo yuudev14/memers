@@ -1,12 +1,16 @@
 const db = require("../../db/knex");
-
+const cloudinary = require("../../utils/cloudinary");
 const addMeme = async(req, res) => {
     try {
         const { user: user_id } = res.locals;
         const { status, media } = req.body;
+        const uploadRequest = await cloudinary.uploader.upload(media, {
+            upload_preset: "memers"
+        })
+        const secure_url = uploadRequest.secure_url;
         if (!media) return res.status(403).send("should pick some media");
         const createMeme = await db
-            .insert({ status, media, user_id })
+            .insert({ status, media: secure_url, user_id })
             .returning("*")
             .into("memes");
         res.send(createMeme);
