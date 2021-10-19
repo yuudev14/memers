@@ -2,8 +2,8 @@ import React from 'react'
 
 const AddMeme = () => {
   const auto_grow = (e) => {
-    e.style.height = "5px";
-    e.style.height = e.scrollHeight + "px";
+    e.target.style.height = `"5px"`;
+    e.target.style.height = e.target.scrollHeight + "px";
   }
   return (
     <section className="addForm">

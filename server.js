@@ -8,8 +8,11 @@ if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, 'client/build')));
 }
 
-
+// route for authentication
 app.use('/auth', require("./routes/auth"));
+
+//route fro  memes
+app.use('/memes', require("./routes/memes"));
 
 const port = process.env.PORT || 4000;
 
