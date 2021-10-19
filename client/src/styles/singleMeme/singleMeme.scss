@@ -2,11 +2,7 @@
 @import "../variables.scss";
 .oneMeme {
     @include meme;
-    position: fixed;
-    width: 100%;
-    max-width: 520px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -45%);
-    display: flex;
+    padding-top: 100px;
+    width: 50%;
+    margin: auto;
 }

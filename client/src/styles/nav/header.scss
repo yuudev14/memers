@@ -18,6 +18,9 @@ header {
             color: $green;
             font-size: 2em;
         }
+        a {
+            text-decoration: none;
+        }
     }
     .authButtons {
         display: flex;
