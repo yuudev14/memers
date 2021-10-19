@@ -1,13 +1,12 @@
 import React, {useState} from 'react';
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addMemeAction } from '../../slice/actions/memeAction';
 
 const AddMeme = () => {
-  const auto_grow = (e) => {
-    e.target.style.height = "20px";
-    e.target.style.height = 25+ e.target.scrollHeight + "px";
-  }
-
   const [preview, setPreview] = useState('');
+  const [status, setStatus] = useState('');
+  const dispatch = useDispatch()
+
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -16,17 +15,23 @@ const AddMeme = () => {
       setPreview(reader.result);
     };
   }
+  const auto_grow = (e) => {
+    setStatus(e.target.value);
+    e.target.style.height = "20px";
+    e.target.style.height = 25+ e.target.scrollHeight + "px";
+  }
 
   const postMeme = async(e) => {
     e.preventDefault();
     try {
-      const add = await axios.post("/memes", {media: preview, status: ""}, {headers : JSON.parse(localStorage.getItem("memers"))});
-      console.log(add);
-      
+      if(preview){
+        await dispatch(addMemeAction({media: preview, status}));
+        setStatus('');
+        setPreview('');
+      }
     } catch (error) {
-      
+      console.log(error);
     }
-    
   }
   return (
     <section className="addForm">
