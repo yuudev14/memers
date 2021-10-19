@@ -8,7 +8,7 @@ route.use(verifyToken);
 route.get('/', memes.allMemes);
 route.post('/', memes.addMeme);
 route.post('/laugh/:id', memes.laughAtMeme);
-route.delete('/:id', memes.laughAtMeme);
-route.patch('/:id', memes.laughAtMeme);
+route.delete('/:id', memes.deleteMeme);
+route.patch('/:id', memes.updateMeme);
 
 module.exports = route;

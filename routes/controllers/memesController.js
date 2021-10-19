@@ -18,15 +18,33 @@ const addMeme = async(req, res) => {
 const deleteMeme = async(req, res) => {
     try {
         const { user: user_id } = res.locals;
+        const { id } = req.params;
+        await db
+            .delete()
+            .from("laughs")
+            .where({ meme_id: id })
+        await db
+            .delete()
+            .from("memes")
+            .where({ id })
+            .andWhere({ user_id });
+        res.send({ id });
     } catch (error) {
         console.log(error);
-
     }
 }
 
 const updateMeme = async(req, res) => {
     try {
         const { user: user_id } = res.locals;
+        const { id } = req.params;
+        const { status, media } = req.body;
+        const updatedMeme = await db("memes")
+            .where({ id })
+            .andWhere({ user_id })
+            .update({ status, media }, ["*"])
+        if (!updatedMeme.length) return res.status(403).send("meme doesn't exist")
+        res.send(updatedMeme);
     } catch (error) {
         console.log(error);
 
