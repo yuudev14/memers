@@ -1,6 +1,6 @@
-import React from 'react';
-import { useDispatch } from "react-redux";
-import { laughAction } from '../../slice/actions/memeAction';
+import React, { useState, useRef } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { deleteMemeAction, editMemeAction, laughAction } from '../../slice/actions/memeAction';
 import moment from "moment";
 import { Link } from 'react-router-dom';
 
@@ -9,6 +9,11 @@ const Memes = (props) => {
     meme
   } = props;
   const dispatch = useDispatch();
+  const [editStatus, setStatus] = useState();
+  const userInfo = useSelector(state => state.auth.userInfo);
+  const pending = useSelector(state => state.memes.pending);
+  const editFieldsRef = useRef();
+  const optionsRef = useRef();
 
   const laughToMeme = async() => {
     try {
@@ -17,23 +22,70 @@ const Memes = (props) => {
       console.log(error);
     }
   }
+  const auto_grow = (e) => {
+    setStatus(e.target.value);
+    e.target.style.height = "20px";
+    e.target.style.height = 25+ e.target.scrollHeight + "px";
+  }
+
+  const editMeme = async(e) => {
+    try {
+      e.preventDefault();
+      await dispatch(editMemeAction({id: meme.id, status: editStatus}));
+      editFieldsRef.current.classList.remove("showEditFields")
+
+    } catch (error) {
+      console.log(error);
+      
+    }
+
+  }
+
+  const deleteMeme = async() => {
+    try {
+      dispatch(deleteMemeAction(meme.id));
+    } catch (error) {
+      
+    }
+  }
 
   return (
     <div className="memes">
-      <div className="meme_header">
+      <section className="meme_header">
         <i className="fa fa-user"></i>
         <div className="memeInfo">
           <h5>{meme.username}</h5>
           <p>{moment(meme.date).fromNow()}</p>
         </div>
-      </div>
-      <div className="meme">
+      </section>
+      <section className="meme">
         <p>{meme.status}</p>
         <Link to={`/${meme.id}`}><img src={meme.media} alt="meme" className="meme_media" /></Link>
-      </div>
-      <div className='icons'>
+      </section>
+      <section className='icons'>
         <div className="laugh"><span onClick={laughToMeme}>{meme.isUser !== "0" ? '🤣' : '😐'}</span>{meme.laugh}</div>
-      </div> 
+      </section>
+
+      { (userInfo && userInfo.username === meme.username) && (
+        <>
+          <div className="options" ref={optionsRef}>
+            <div className="optionBtns">
+              <button onClick={deleteMeme}>Delete</button>
+              <button onClick={() => editFieldsRef.current.classList.toggle("showEditFields")}>Edit</button>
+            </div>
+            <div className="editFields" ref={ editFieldsRef }>
+              <form onSubmit={editMeme}>
+                <textarea onChange={auto_grow} placeholder="What to status"></textarea>
+                <input type="submit" disabled={pending}/>
+              </form> 
+
+            </div>
+          </div> 
+          <i className="fa fa-ellipsis-v" onClick={() => optionsRef.current.classList.toggle("showOptions")}></i>
+        </>
+      )}
+      
+      
     </div>
   )
 }

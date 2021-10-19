@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addMemeAction, laughAction, viewAllMemeAction, viewSingleMemeAction } from "./actions/memeAction";
+import { addMemeAction, deleteMemeAction, editMemeAction, laughAction, viewAllMemeAction, viewSingleMemeAction } from "./actions/memeAction";
 
 const initialState = {
     memes: [],
@@ -53,6 +53,28 @@ const memeSlice = createSlice({
             })
             state.pending = false;
         },
+        [deleteMemeAction.pending]: (state, action) => {
+            state.pending = true;
+        },
+        [deleteMemeAction.fulfilled]: (state, action) => {
+            state.memes = state.memes.filter(meme => meme.id !== action.payload.id);
+            state.pending = false;
+        },
+        [editMemeAction.pending]: (state, action) => {
+            state.pending = true;
+        },
+        [editMemeAction.fulfilled]: (state, action) => {
+            state.memes = state.memes.map(meme => {
+                if (meme.id === action.payload.id) {
+                    return {
+                        ...meme,
+                        ...action.payload,
+                    }
+                }
+                return meme
+            });
+            state.pending = false;
+        }
     }
 });
 

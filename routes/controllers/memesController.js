@@ -58,11 +58,11 @@ const updateMeme = async(req, res) => {
     try {
         const { user: user_id } = res.locals;
         const { id } = req.params;
-        const { status, media } = req.body;
+        const { status } = req.body;
         const updatedMeme = await db("memes")
             .where({ id })
             .andWhere({ user_id })
-            .update({ status, media }, ["*"])
+            .update({ status }, ["*"])
         if (!updatedMeme.length) return res.status(403).send("meme doesn't exist")
         res.send(updatedMeme);
     } catch (error) {

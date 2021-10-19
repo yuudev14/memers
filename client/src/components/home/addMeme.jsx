@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addMemeAction } from '../../slice/actions/memeAction';
 
 const AddMeme = () => {
   const [preview, setPreview] = useState('');
   const [status, setStatus] = useState('');
   const dispatch = useDispatch()
+  const pending = useSelector(state => state.memes.pending);
 
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
@@ -42,8 +43,9 @@ const AddMeme = () => {
           <label htmlFor="memeFile" >
             <i className="fa fa-image"></i>
           </label>
-          <input type="submit" disabled={preview ? false : true} />
+          <input type="submit" disabled={(preview ? false : true) || pending} />
         </div>
+        <input type="text" onChange={(e) => setPreview(e.target.value)}/>
         { preview && <img src={preview} alt="preview meme"/> }
       </form> 
     </section>

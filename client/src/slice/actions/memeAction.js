@@ -38,4 +38,23 @@ export const laughAction = createAsyncThunk("memes/laughAction", async(id) => {
     } catch (error) {
         console.log(error);
     }
-})
+});
+
+export const deleteMemeAction = createAsyncThunk("memes/deleteMemeAction", async(id) => {
+    try {
+        const meme = await axios.delete(`/memes/${id}`, { headers: JSON.parse(localStorage.getItem("memers")) });
+        console.log(meme.data);
+        return meme.data;
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+export const editMemeAction = createAsyncThunk("memes/editMemeAction", async({ id, status }) => {
+    try {
+        const meme = await axios.patch(`/memes/${id}`, { status }, { headers: JSON.parse(localStorage.getItem("memers")) });
+        return meme.data[0];
+    } catch (error) {
+        console.log(error);
+    }
+});

@@ -5,6 +5,7 @@
         background-color: $secondaryColor;
         margin-bottom: 20px;
         border-radius: 12px;
+        position: relative;
         .meme_header,
         .icons {
             padding: 10px 20px;
@@ -38,6 +39,55 @@
                     margin: 0;
                 }
             }
+        }
+        .options {
+            position: absolute;
+            top: 80px;
+            right: 20px;
+            z-index: 10;
+            background-color: rgba(24, 24, 24, 0.5);
+            width: 40%;
+            padding: 20px;
+            border-radius: 12px;
+            display: none;
+            .optionBtns {
+                display: flex;
+                justify-content: space-between;
+                button {
+                    width: 40%;
+                }
+            }
+            .editFields {
+                height: 0;
+                overflow: hidden;
+                textarea {
+                    width: 100%;
+                    resize: none;
+                    outline: none;
+                    margin-top: 20px;
+                    padding: 5px;
+                }
+                input {
+                    width: 100%;
+                    padding: 5px;
+                    border-radius: 12px;
+                    outline: none;
+                    border: none;
+                }
+            }
+            .showEditFields {
+                height: max-content;
+            }
+        }
+        .showOptions {
+            display: block;
+        }
+        .fa-ellipsis-v {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
         }
     }
 }

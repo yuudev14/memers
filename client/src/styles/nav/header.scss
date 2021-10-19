@@ -5,6 +5,7 @@ header {
     left: 0;
     width: 100%;
     background-color: $secondaryColor;
+    z-index: 100;
     nav {
         display: flex;
         justify-content: space-between;

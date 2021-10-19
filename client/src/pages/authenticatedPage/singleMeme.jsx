@@ -9,7 +9,7 @@ import { resetMemeAction } from '../../slice/memeSlice';
 const SingleMeme = () => {
   const dispatch = useDispatch()
   const { id } = useParams();
-  const memes = useSelector(state => state.memes.memes)
+  const memes = useSelector(state => state.memes.memes);
   useEffect(() => {
     (async() => {
       try {
@@ -22,11 +22,11 @@ const SingleMeme = () => {
     return () => {
       dispatch(resetMemeAction())
     }
-  }, [])
+  }, []);
   return (
     <main>
       <section className="oneMeme">
-        { memes.map(meme => (
+        { (memes.length === 1 && memes[0].id === id) && memes.map(meme => (
           <Memes meme={meme}/>
         )) }
       </section>
