@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addMemeAction, deleteMemeAction, editMemeAction, laughAction, viewAllMemeAction, viewSingleMemeAction } from "./actions/memeAction";
+import { addCommentsAction, addMemeAction, deleteMemeAction, editMemeAction, laughAction, viewAllMemeAction, viewCommentsAction, viewSingleMemeAction } from "./actions/memeAction";
 
 const initialState = {
     memes: [],
@@ -40,7 +40,6 @@ const memeSlice = createSlice({
             state.pending = true
         },
         [laughAction.fulfilled]: (state, action) => {
-            console.log(action.payload);
             state.memes = state.memes.map(meme => {
                 if (meme.id === action.payload.meme_id) {
                     return {
@@ -74,7 +73,37 @@ const memeSlice = createSlice({
                 return meme
             });
             state.pending = false;
-        }
+        },
+        [viewCommentsAction.pending]: (state) => {
+            state.pending = true;
+        },
+        [viewCommentsAction.fulfilled]: (state, action) => {
+            state.memes = state.memes.map(meme => {
+                if (meme.id === action.payload[0].meme_id) {
+                    return {
+                        ...meme,
+                        comments: action.payload
+                    }
+                }
+                return meme
+            });
+            state.pending = false;
+        },
+        [addCommentsAction.pending]: (state) => {
+            state.pending = true;
+        },
+        [addCommentsAction.fulfilled]: (state, action) => {
+            state.memes = state.memes.map(meme => {
+                if (meme.id === action.payload.meme_id) {
+                    return {
+                        ...meme,
+                        comments: [action.payload, ...meme.comments]
+                    }
+                }
+                return meme
+            });
+            state.pending = false;
+        },
     }
 });
 

@@ -43,7 +43,6 @@ export const laughAction = createAsyncThunk("memes/laughAction", async(id) => {
 export const deleteMemeAction = createAsyncThunk("memes/deleteMemeAction", async(id) => {
     try {
         const meme = await axios.delete(`/memes/${id}`, { headers: JSON.parse(localStorage.getItem("memers")) });
-        console.log(meme.data);
         return meme.data;
     } catch (error) {
         console.log(error);
@@ -58,3 +57,23 @@ export const editMemeAction = createAsyncThunk("memes/editMemeAction", async({ i
         console.log(error);
     }
 });
+
+export const viewCommentsAction = createAsyncThunk("memes/viewCommentsAction", async(id) => {
+    try {
+        const comments = await axios.get(`/memes/comment/${id}`, { headers: JSON.parse(localStorage.getItem("memers")) });
+        return comments.data;
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+export const addCommentsAction = createAsyncThunk("memes/addCommentsAction", async({ id, comment }) => {
+    try {
+        const commentReq = await axios.post(`/memes/comment/${id}`, { comment }, { headers: JSON.parse(localStorage.getItem("memers")) });
+        return commentReq.data;
+
+    } catch (error) {
+        console.log(error);
+    }
+})

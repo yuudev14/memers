@@ -29,7 +29,6 @@ const authSlice = createSlice({
     },
     extraReducers: {
         [verifyAuth.fulfilled]: (state, action) => {
-            console.log(action.payload);
             if (action.payload) {
                 return {
                     ...state,

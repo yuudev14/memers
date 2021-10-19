@@ -100,6 +100,7 @@ const viewComment = async(req, res) => {
         const commentData = await db("comments")
             .select(["comments.*", "users.username"])
             .leftJoin("users", "users.id", "comments.user_id")
+            .orderBy("comments.date", "desc")
             .whereRaw("comments.meme_id = ?", [meme_id])
         res.send(commentData);
 

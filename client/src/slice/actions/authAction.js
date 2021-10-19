@@ -6,7 +6,6 @@ export const verifyAuth = createAsyncThunk("auth/verifyAuth", async() => {
         const token = localStorage.getItem("memers");
         if (token) {
             const verify = await axios.get("/auth", { headers: JSON.parse(token) });
-            console.log(verify);
             return verify.data;
         }
         return false;

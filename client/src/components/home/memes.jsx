@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { deleteMemeAction, editMemeAction, laughAction } from '../../slice/actions/memeAction';
+import { addCommentsAction, deleteMemeAction, editMemeAction, laughAction, viewCommentsAction } from '../../slice/actions/memeAction';
 import moment from "moment";
 import { Link } from 'react-router-dom';
 
@@ -10,10 +10,12 @@ const Memes = (props) => {
   } = props;
   const dispatch = useDispatch();
   const [editStatus, setStatus] = useState();
+  const [comment, setComment] = useState();
   const userInfo = useSelector(state => state.auth.userInfo);
   const pending = useSelector(state => state.memes.pending);
   const editFieldsRef = useRef();
   const optionsRef = useRef();
+  const commentRef = useRef();
 
   const laughToMeme = async() => {
     try {
@@ -36,16 +38,38 @@ const Memes = (props) => {
 
     } catch (error) {
       console.log(error);
-      
     }
-
   }
 
   const deleteMeme = async() => {
     try {
       dispatch(deleteMemeAction(meme.id));
     } catch (error) {
-      
+      console.log(error);
+    }
+  }
+
+  const viewComment = async() => {
+    try {
+      commentRef.current.classList.toggle("showComments");
+      if ([...commentRef.current.classList].includes("showComments")) {
+        dispatch(viewCommentsAction(meme.id));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
+  const addComment = async(e) => {
+    try {
+      e.preventDefault();
+      if(comment.length) {
+        await dispatch(addCommentsAction({id: meme.id, comment}));
+        setComment("");
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -63,7 +87,20 @@ const Memes = (props) => {
         <Link to={`/${meme.id}`}><img src={meme.media} alt="meme" className="meme_media" /></Link>
       </section>
       <section className='icons'>
-        <div className="laugh"><span onClick={laughToMeme}>{meme.isUser !== "0" ? '🤣' : '😐'}</span>{meme.laugh}</div>
+        <span className="laugh" onClick={laughToMeme}>{meme.isUser !== "0" ? '🤣' : '😐'}{meme.laugh}</span>
+        <span className="fa fa-comments" onClick={viewComment}></span>
+      </section>
+      <section className="comments" ref={commentRef}>
+        <form onSubmit={addComment}>
+          <input value={comment} type="text" placeholder="write a comment...." onChange={(e) => setComment(e.target.value)}/>
+          <input type="submit" />
+        </form>
+        {(meme.comments && meme.comments.map(comment => (
+          <div className="comment">
+            <h3>{comment.username}</h3>
+            <p>{comment.comment}</p>
+          </div>
+        )))}
       </section>
 
       { (userInfo && userInfo.username === meme.username) && (
