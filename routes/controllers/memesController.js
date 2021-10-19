@@ -62,7 +62,20 @@ const laughAtMeme = async(req, res) => {
 }
 const allMemes = async(req, res) => {
     try {
-        const memes = await db()
+        const { user: user_id } = res.locals;
+        const counts = db("laughs")
+            .count("meme_id")
+            .whereRaw("memes.id = laughs.meme_id")
+            .as("laugh");
+        const isUser = db("laughs")
+            .count("user_id")
+            .where({ user_id })
+            .andWhereRaw("memes.id = laughs.meme_id")
+            .as("isUser");
+        const memes = await db
+            .select("*", counts, isUser)
+            .from("memes");
+        res.send(memes);
     } catch (error) {
         console.log(error);
 
