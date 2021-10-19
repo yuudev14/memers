@@ -4,6 +4,7 @@ import "../../styles/singleMeme/singleMeme.scss";
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { viewSingleMemeAction } from '../../slice/actions/memeAction';
+import { resetMemeAction } from '../../slice/memeSlice';
 
 const SingleMeme = () => {
   const dispatch = useDispatch()
@@ -17,7 +18,10 @@ const SingleMeme = () => {
       } catch (error) {
         console.log(error);
       }
-    })()
+    })();
+    return () => {
+      dispatch(resetMemeAction())
+    }
   }, [])
   return (
     <main>

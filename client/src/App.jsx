@@ -24,13 +24,13 @@ const App = () =>{
                 <Home />
               </Authenticated>
             </Route>
+            <Route path="/sign-up" component={SignUp} />
+            <Route path="/sign-in" component={SignIn} />
             <Route path="/:id">
               <Authenticated>
                 <SingleMeme />
               </Authenticated>
             </Route>
-            <Route path="/sign-up" component={SignUp} />
-            <Route path="/sign-in" component={SignIn} />
           </Switch>
       </Router>
       

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AddMeme from "../../components/home/addMeme";
 import Memes from '../../components/home/memes';
 import { viewAllMemeAction } from '../../slice/actions/memeAction';
+import { resetMemeAction } from '../../slice/memeSlice';
 import "../../styles/home/home.scss";
 
 const Home = () => {
@@ -15,6 +16,12 @@ const Home = () => {
       dispatch(viewAllMemeAction());
     }
   }, [auth]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetMemeAction())
+    }
+  }, []);
   return (
     <main className="home">
       <section className="memeFeed">
