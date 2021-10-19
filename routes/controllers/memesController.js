@@ -11,9 +11,26 @@ const addMeme = async(req, res) => {
         if (!media) return res.status(403).send("should pick some media");
         const createMeme = await db
             .insert({ status, media: secure_url, user_id })
-            .returning("*")
+            .returning("id")
             .into("memes");
-        res.send(createMeme);
+
+        const counts = db("laughs")
+            .count("meme_id")
+            .whereRaw("memes.id = laughs.meme_id")
+            .as("laugh");
+        const isUser = db("laughs")
+            .count("user_id")
+            .where({ user_id })
+            .andWhereRaw("memes.id = laughs.meme_id")
+            .as("isUser");
+        const memes = await db
+            .select("memes.*", counts, isUser, "users.username")
+            .from("memes")
+            .leftJoin('users', 'users.id', 'memes.user_id')
+            .whereRaw("memes.id = ?", [createMeme[0]])
+            .orderBy("date", "desc");
+        console.log(memes);
+        res.send(memes);
     } catch (error) {
         console.log(error);
     }
@@ -67,14 +84,14 @@ const laughAtMeme = async(req, res) => {
         if (!ifExist.length) {
             await db("laughs")
                 .insert({ meme_id, user_id });
-            res.send(true);
+            res.send({ isUser: "1", meme_id });
         } else {
             await db
                 .delete()
                 .from("laughs")
                 .where({ meme_id })
                 .andWhere({ user_id });
-            res.send(false);
+            res.send({ isUser: "0", meme_id });
         }
 
     } catch (error) {
@@ -98,6 +115,7 @@ const allMemes = async(req, res) => {
             .select("memes.*", counts, isUser, "users.username")
             .from("memes")
             .leftJoin('users', 'users.id', 'memes.user_id')
+            .orderBy("date", "desc")
         res.send(memes);
     } catch (error) {
         console.log(error);

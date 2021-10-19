@@ -18,4 +18,13 @@ export const viewAllMemeAction = createAsyncThunk("memes/viewAllMemeAction", asy
     } catch (error) {
         console.log(error);
     }
+});
+
+export const laughAction = createAsyncThunk("memes/laughAction", async(id) => {
+    try {
+        const meme = await axios.post(`/memes/laugh/${id}`, {}, { headers: JSON.parse(localStorage.getItem("memers")) });
+        return meme.data;
+    } catch (error) {
+        console.log(error);
+    }
 })

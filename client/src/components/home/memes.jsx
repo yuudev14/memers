@@ -1,10 +1,20 @@
-import React from 'react'
+import React from 'react';
+import { useDispatch } from "react-redux";
+import { laughAction } from '../../slice/actions/memeAction';
 
 const Memes = (props) => {
   const {
     meme
   } = props;
-  console.log(meme);
+  const dispatch = useDispatch();
+
+  const laughToMeme = async() => {
+    try {
+      await dispatch(laughAction(meme.id));
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="memes">
@@ -17,10 +27,10 @@ const Memes = (props) => {
       </div>
       <div className="meme">
         <p>{meme.status}</p>
-        <img src={meme.media} alt="meme" className="meme_media"/>
+        <img src={meme.media} alt="meme" className="meme_media" />
       </div>
       <div className='icons'>
-        <div className="laugh"><span>{meme.isUser !== "0" ? '🤣' : '😐'}</span>{meme.laugh}</div>
+        <div className="laugh"><span onClick={laughToMeme}>{meme.isUser !== "0" ? '🤣' : '😐'}</span>{meme.laugh}</div>
       </div> 
     </div>
   )
