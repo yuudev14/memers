@@ -78,15 +78,17 @@ const memeSlice = createSlice({
             state.pending = true;
         },
         [viewCommentsAction.fulfilled]: (state, action) => {
-            state.memes = state.memes.map(meme => {
-                if (meme.id === action.payload[0].meme_id) {
-                    return {
-                        ...meme,
-                        comments: action.payload
+            if (action.payload.length) {
+                state.memes = state.memes.map(meme => {
+                    if (meme.id === action.payload[0].meme_id) {
+                        return {
+                            ...meme,
+                            comments: action.payload
+                        }
                     }
-                }
-                return meme
-            });
+                    return meme
+                });
+            }
             state.pending = false;
         },
         [addCommentsAction.pending]: (state) => {
@@ -97,7 +99,7 @@ const memeSlice = createSlice({
                 if (meme.id === action.payload.meme_id) {
                     return {
                         ...meme,
-                        comments: [action.payload, ...meme.comments]
+                        comments: meme.comments ? [action.payload, ...meme.comments] : [action.payload]
                     }
                 }
                 return meme
