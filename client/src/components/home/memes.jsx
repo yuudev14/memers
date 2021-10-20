@@ -9,7 +9,7 @@ const Memes = (props) => {
     meme
   } = props;
   const dispatch = useDispatch();
-  const [editStatus, setStatus] = useState();
+  const [editStatus, setStatus] = useState(meme.status);
   const [comment, setComment] = useState();
   const userInfo = useSelector(state => state.auth.userInfo);
   const pending = useSelector(state => state.memes.pending);
@@ -34,7 +34,7 @@ const Memes = (props) => {
     try {
       e.preventDefault();
       await dispatch(editMemeAction({id: meme.id, status: editStatus}));
-      editFieldsRef.current.classList.remove("showEditFields")
+      editFieldsRef.current.classList.remove("showEditFields");
 
     } catch (error) {
       console.log(error);
@@ -112,7 +112,7 @@ const Memes = (props) => {
             </div>
             <div className="editFields" ref={ editFieldsRef }>
               <form onSubmit={editMeme}>
-                <textarea onChange={auto_grow} placeholder="What to status"></textarea>
+                <textarea value={editStatus} onChange={auto_grow} placeholder="What to status"></textarea>
                 <input type="submit" disabled={pending}/>
               </form> 
 
