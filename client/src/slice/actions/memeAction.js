@@ -6,7 +6,7 @@ export const addMemeAction = createAsyncThunk("memes/addMemeAction", async(memes
         const add = await axios.post("/memes", memes, { headers: JSON.parse(localStorage.getItem("memers")) });
         return add.data;
     } catch (error) {
-        console.log(error);
+        return { error: error.response.data };
     }
 });
 

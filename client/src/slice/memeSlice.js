@@ -3,7 +3,8 @@ import { addCommentsAction, addMemeAction, deleteMemeAction, editMemeAction, lau
 
 const initialState = {
     memes: [],
-    pending: false
+    pending: false,
+    error: ""
 }
 
 const memeSlice = createSlice({
@@ -12,6 +13,9 @@ const memeSlice = createSlice({
     reducers: {
         resetMemeAction: (state) => {
             state.meme = [];
+        },
+        restartMemeError: (state) => {
+            state.error = ""
         }
     },
     extraReducers: {
@@ -19,7 +23,12 @@ const memeSlice = createSlice({
             state.pending = true
         },
         [addMemeAction.fulfilled]: (state, action) => {
-            state.memes = [...action.payload, ...state.memes];
+            if ("error" in action.payload) {
+                state.error = action.payload.error
+            } else {
+                state.memes = [...action.payload, ...state.memes];
+
+            }
             state.pending = false;
         },
         [viewAllMemeAction.pending]: (state) => {
@@ -110,5 +119,5 @@ const memeSlice = createSlice({
 });
 
 const memeReducer = memeSlice.reducer;
-export const { resetMemeAction } = memeSlice.actions
+export const { resetMemeAction, restartMemeError } = memeSlice.actions
 export default memeReducer;

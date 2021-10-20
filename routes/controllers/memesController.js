@@ -31,7 +31,8 @@ const addMeme = async(req, res) => {
             .orderBy("date", "desc");
         res.send(memes);
     } catch (error) {
-        console.log(error);
+        console.log(error.error);
+        res.status(403).send("insert a valid image or gif");
     }
 }
 
