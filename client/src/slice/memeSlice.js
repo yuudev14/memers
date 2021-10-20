@@ -87,7 +87,6 @@ const memeSlice = createSlice({
             state.pending = true;
         },
         [viewCommentsAction.fulfilled]: (state, action) => {
-            console.log(action.payload)
             if (action.payload.length) {
                 state.memes = state.memes.map(meme => {
                     if (meme.id === action.payload[0].meme_id) {
