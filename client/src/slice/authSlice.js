@@ -23,7 +23,10 @@ const authSlice = createSlice({
         },
         logoutAuth: () => {
             localStorage.removeItem("memers");
-            return initialState;
+            return {
+                ...initialState,
+                auth: false
+            };
         }
 
     },
