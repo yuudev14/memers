@@ -34,7 +34,7 @@ const signIn = async(req, res) => {
             .where({ username: usernameOrEmail })
             .orWhere({ email: usernameOrEmail })
             .select("*");
-        if (user) {
+        if (user.length) {
             const userPassword = user[0].password;
             const userId = user[0].id;
             const result = await bcrypt.compare(password, userPassword);

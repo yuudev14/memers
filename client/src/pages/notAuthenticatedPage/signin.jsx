@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import "../../styles/auth/signup_signin.scss";
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '../../slice/actions/authAction';
+import { resetAuthErrors } from '../../slice/authSlice';
 
 const Signin = () => {
   const initstate = {
@@ -22,9 +23,16 @@ const Signin = () => {
     })
   }
 
+  useEffect(() => {
+    return () => {
+      dispatch(resetAuthErrors());
+    }
+  }, [])
+
   const login = async(e) => {
     try {
       e.preventDefault();
+      dispatch(resetAuthErrors())
       const action = await dispatch(loginAction(loginForm));
       if ("token" in action.payload) {
         history.push("/");
