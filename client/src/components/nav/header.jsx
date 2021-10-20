@@ -10,7 +10,7 @@ const Header = () => {
  return (
     <header>
       <nav>
-        <Link to="/"><h1 onClick={() => console.log(auth)}>Memers</h1></Link>
+        <Link to="/"><h1>Memers</h1></Link>
         <AuthHeaderBtn />
       </nav>
     </header>
