@@ -7,6 +7,19 @@
   width: 100%;
   justify-content: center;
   margin-top: 90px;
+  .fa-plus-circle {
+    position: fixed;
+    z-index: 100;
+    bottom: 50px;
+    right: 50px;
+    font-size: 3em;
+    box-shadow: 1px 1px 5px black;
+    border-radius: 100px;
+    &:hover {
+      transform: scale(1.05);
+      cursor: pointer;
+    }
+  }
   .memeFeed {
     width: 100%;
     padding: 20px;
@@ -22,7 +35,11 @@
     display: flex;
     justify-content: center;
   }
+  .showForm {
+    display: block !important;
+  }
   .profileAndAddMeme {
+    display: none;
     width: 100%;
     height: 100vh;
     @include addForm;
@@ -41,6 +58,9 @@
 
 @media only screen and (min-width: 1080px) {
   .home {
+    .fa-plus-circle {
+      display: none;
+    }
     .profileAndAddMeme {
       position: relative !important;
       display: block;
