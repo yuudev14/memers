@@ -10,8 +10,8 @@
     <li><a href="#usage">Things you can do</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#futureFeatures">Future Features</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -97,15 +97,19 @@
   </ul>
   
 </section>
+ <section id="futureFeatures">
+  <h1>future Features</h1>
+    <p>Create a feature that will let memers to edit their photo memes to make it more engaging for the users</p>
+
+  
+</section>
 
 <section id="contact">
 <h1>Contact</h1>
 <p>phone number: 09041630614</p>
 <p>email: takakiiiyuuu@gmail.com</p>
-<p>link: <a><a></p>
+<p>link: <a href="https://yu-memers.herokuapp.com/" target="_blank">https://yu-memers.herokuapp.com/<a></p>
   
 </section>
-<section id="acknowledgments">
-<h1>Acknowledgments</h1>
   
-</section>
+ 
