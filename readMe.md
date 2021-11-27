@@ -1,22 +1,20 @@
-<h1>Memers</h1>
+<h1>Memers 😜</h1>
 <h3>"This was created during my time as a student at Code Chrysalis."</h3>
 
 <details>
-  <summary>Table of contents</summary>
+  <summary>Table of contents table</summary>
   <ol>
     <li><a href="#pictures">Pictures</a></li>
     <li><a href="#aboutApp">About App</a></li>
     <li><a href="#getting-started">Getting Started</a></li>
     <li><a href="#usage">Things you can do</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#futureFeatures">Future Features</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
 
 <section id="pictures">
-  <h1>Images</h1>
+  <h1>Images 🖼</h1>
   <img src="./images/home.png">
   <img src="./images/onememe.png">
   <img src="./images/signin.png">
@@ -24,7 +22,7 @@
   
 </section>
 <section id="aboutApp">
-  <h1>About app</h1>
+  <h1>About app 📝</h1>
   <p>There are lots of memes out there posted in social media. In fact what's a day without a meme. This app is focus on "memers" who loves too post their created memes around the world</p>
   
 </section>
@@ -70,7 +68,7 @@
 </section>
 
 <section id="usage">
-  <h1>Things you can do</h1>
+  <h1>Things you can do 👍</h1>
   <ul>
     <li>Can create an account</li>
     <li>Can log in to your account</li>
@@ -83,7 +81,7 @@
   
 </section>
 <section id="technology">
-  <h1>Technology used</h1>
+  <h1>Technology used 💻</h1>
 
   <ul>
     <li>react</li>
@@ -98,14 +96,14 @@
   
 </section>
  <section id="futureFeatures">
-  <h1>future Features</h1>
+  <h1>future Features 🔮</h1>
     <p>Create a feature that will let memers to edit their photo memes to make it more engaging for the users</p>
 
   
 </section>
 
 <section id="contact">
-<h1>Contact</h1>
+<h1>Contact 📞</h1>
 <p>phone number: 09041630614</p>
 <p>email: takakiiiyuuu@gmail.com</p>
 <p>link: <a href="https://yu-memers.herokuapp.com/" target="_blank">https://yu-memers.herokuapp.com/<a></p>
