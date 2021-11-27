@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addAuthErrors, resetAuthErrors } from '../../slice/authSlice';
-import { signupAction } from '../../slice/actions/authAction';
+import { addAuthErrors, resetAuthErrors } from "../../slice/authSlice";
+import { signupAction } from "../../slice/actions/authAction";
 
 const Signup = () => {
   const initstate = {
     email: "",
     username: "",
     password: "",
-    retryPassword: ""
-  }
+    retryPassword: "",
+  };
   const [signupForm, setSignupForm] = useState(initstate);
-  const errors = useSelector(state => state.auth.errors);
+  const errors = useSelector((state) => state.auth.errors);
   const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
     return () => {
       dispatch(resetAuthErrors());
-    }
-  }, [])
+    };
+  }, [dispatch]);
 
-  const signup = async(e) => {
+  const signup = async (e) => {
     e.preventDefault();
-    dispatch(resetAuthErrors())
+    dispatch(resetAuthErrors());
     let pass = true;
     const { username, password, retryPassword } = signupForm;
     if (username.length < 7) {
@@ -37,46 +37,70 @@ const Signup = () => {
     }
 
     if (password !== retryPassword) {
-      pass = false
+      pass = false;
       dispatch(addAuthErrors("password doesn't match"));
     }
 
-    if(pass){
+    if (pass) {
       const action = await dispatch(signupAction(signupForm));
       if ("token" in action.payload) {
         history.push("/");
       }
     }
-  }
+  };
 
   const updateSignupForm = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     setSignupForm({
       ...signupForm,
-      [name] : value
-    })
-  }
-
+      [name]: value,
+    });
+  };
 
   return (
-    <main className='signup'>
+    <main className="signup">
       <form onSubmit={signup}>
         <ul>
-          {errors.map(li => (
+          {errors.map((li) => (
             <li key={li}>{li}</li>
           ))}
         </ul>
         <h1>Sign up</h1>
-        <input type="email" name="email" onChange={updateSignupForm} required placeholder="email"/>
-        <input type="text" name="username" onChange={updateSignupForm} required placeholder="username"/>
-        <input type="password" name="password" onChange={updateSignupForm} required placeholder="password"/>
-        <input type="password" name="retryPassword" onChange={updateSignupForm} required placeholder="retry password"/>
-        <input type="submit"/>
-        <p>Already have an account? <Link to="/sign-in">Sign-in</Link></p>
+        <input
+          type="email"
+          name="email"
+          onChange={updateSignupForm}
+          required
+          placeholder="email"
+        />
+        <input
+          type="text"
+          name="username"
+          onChange={updateSignupForm}
+          required
+          placeholder="username"
+        />
+        <input
+          type="password"
+          name="password"
+          onChange={updateSignupForm}
+          required
+          placeholder="password"
+        />
+        <input
+          type="password"
+          name="retryPassword"
+          onChange={updateSignupForm}
+          required
+          placeholder="retry password"
+        />
+        <input type="submit" />
+        <p>
+          Already have an account? <Link to="/sign-in">Sign-in</Link>
+        </p>
       </form>
-      
     </main>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;

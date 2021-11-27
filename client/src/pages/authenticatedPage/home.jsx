@@ -16,13 +16,13 @@ const Home = () => {
     if (auth) {
       dispatch(viewAllMemeAction());
     }
-  }, [auth]);
+  }, [auth, dispatch]);
 
   useEffect(() => {
     return () => {
       dispatch(resetMemeAction());
     };
-  }, []);
+  }, [dispatch]);
 
   const toggleForm = () => {
     profileAndAddMemeRef.current.classList.toggle("showForm");
