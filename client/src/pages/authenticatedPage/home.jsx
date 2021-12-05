@@ -7,6 +7,7 @@ import { resetMemeAction } from "../../slice/memeSlice";
 import "../../styles/home/home.scss";
 
 const Home = () => {
+  
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth.auth);
   const memes = useSelector((state) => state.memes.memes);
